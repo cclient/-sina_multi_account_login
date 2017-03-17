@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+</head>
+<body style="margin: 0px">
+<div id="seldiv">
+</div>
+
+<div id="showimg" style="float: left;width:1000px;height: 1000px">
+    <img src="pic.jpg" id="imgfile" style="float: left;"/>
+</div>
+
+<div style="width: 800px;height: 400px">
+
+    <lable>总宽</lable>
+    <input type="text" id="aw">
+    <lable>总高</lable>
+    <input type="text" id="ah">
+    <br>
+    <lable>按钮左边距</lable>
+    <input type="text" id="bl">
+    <lable>按钮上边距</lable>
+    <input type="text" id="bt">
+    <br>
+    <lable>按钮左比例</lable>
+    <input type="text" id="blb">
+    <lable>按钮上比例</lable>
+    <input type="text" id="btb">
+    <br>
+    <lable>按钮右边距</lable>
+    <input type="text" id="br">
+    <lable>按钮下边距</lable>
+    <input type="text" id="bd">
+    <br>
+
+    <lable>按钮宽比例</lable>
+    <input type="text" id="bwb">
+    <lable>按钮高比例</lable>
+    <input type="text" id="bhb">
+</div>
+
+</body>
+<script>
+    var opt = (function () {
+        var ishasdiv = false;
+        //是否定型，放开鼠标后，停止跟踪变化
+        var isend = false;
+        var allheight, allwidth, selself, seltop;
+
+        function ini() {
+            var img = $("#imgfile");
+            img.load(function () {
+                allheight = this.height;
+                allwidth = this.width;
+                $("#aw").val(allwidth);
+                $("#ah").val(allheight);
+            });
+            //为图片添加覆盖层
+            var trk = $('#showimg');
+            trk.css({
+                opacity: 0.9,
+                backgroundColor: 'white',
+                zIndex: 50,
+                height: allheight,
+                width: allwidth
+            });
+            var seldiv = $("#seldiv");
+            seldiv.css({
+                position: 'absolute',
+                opacity: 0.8,
+                backgroundColor: 'red',
+                zIndex: 100
+            });
+            //为层加事件
+            trk.mousedown(function (e) {
+                isend = false;
+                var pagx = e.pageX;
+                var pagy = e.pageY;
+                selself = pagx;
+                seltop = pagy;
+                $("#bl").val(pagx);
+                $("#bt").val(pagy);
+                $("#blb").val((pagx / allwidth));
+                $("#btb").val((pagy / allheight));
+                $("#seldiv").css({
+                    left: pagx,
+                    top: pagy,
+                    width: 0,
+                    height: 0
+                });
+                ishasdiv = true;
+                e.stopPropagation();
+                e.preventDefault();
+            });
+            trk.mousemove(function (e) {
+                if (ishasdiv && !isend) {
+                    var pagx = e.pageX;
+                    var pagy = e.pageY;
+                    var w = pagx - selself;
+                    var y = pagy - seltop;
+                    $("#br").val(pagx);
+                    $("#bd").val(pagy);
+                    $("#bwb").val((w / allwidth));
+                    $("#bhb").val((y / allheight));
+                    $("#seldiv").css({
+                        width: w,
+                        height: y
+                    });
+                }
+                e.stopPropagation();
+                e.preventDefault();
+            });
+            trk.mouseup(function (e) {
+                if (ishasdiv) {
+                    isend = true;
+                }
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        }
+
+        return ini;
+    })()
+    $(document).ready(function () {
+        opt();
+    });
+</script>
+</html>

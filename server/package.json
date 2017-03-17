@@ -1,0 +1,26 @@
+{
+  "name": "sign_login_server",
+  "version": "1.0.0",
+  "description": "新浪小号刷token后台",
+  "main": "",
+  "scripts": {
+    "test": "node client.js 8987",
+    "server": "./node_modules/.bin/phantomjs server.js 8987"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/microsoft/typescriptsamples.git"
+  },
+  "keywords": [
+    "sina token"
+  ],
+  "author": "Cui Dapeng",
+  "license": "Apache-2.0",
+  "bugs": {},
+  "dependencies": {
+    "gm": "^1.23.0",
+    "phantomjs": "^2.1.7",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {}
+}

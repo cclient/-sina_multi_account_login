@@ -1,0 +1,12 @@
+/**
+ * Created by cclient on 12/26/16.
+ */
+
+module.exports = {
+    serverurl: "http://localhost:8987",
+    resulturl: "http://auth.socialmaster.cn/system/accounts?maxResults=500&key=4052155134&remarks=owner,cly",
+
+    codeurl: "http://ali-checkcode.showapi.com",
+    codepath: "/checkcode",
+    appcode: "8c6aee7319ec48668213a72c7e3cece4"
+}
