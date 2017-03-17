@@ -40,14 +40,17 @@
 * tool/showimage.html 输入base64查看img
 
 ###server
+
 * server/server.js 新浪小号刷新token server
 * server/client.js 新浪小号刷新token client 单项账号
 
 ###client
+
 * client/src/cron/sinaRefreshToken.ts 批量刷新(在客户端作100%保证，每执行一次检查所有账号状态，所有成功都则退出，否则一直执行)
 * client/src/cron/index.ts 定时后台(如果上次的任务还未运行完，则下次定时不会新启任务，以任务名标识)
 
 ###遇到的问题
+
 1. 计划通过canvas 拿验证码图片转为base64，但toDataURL方法无法跨域，失败
 2. 先拿html页，再单独打开验证码，用新页的验证码验证，chrome里成功，但phantomjs设cookies依然失败，失败，应是不同page的跨域cookies有问题。
 3. 拿html,整页截图，按坐标，截取出验证验部分，成功。
@@ -55,5 +58,6 @@
 现项目采用方案3。
 
 ###若使用或测试有疑问
+
 可以联系邮箱
 cclient@hotmail.com
